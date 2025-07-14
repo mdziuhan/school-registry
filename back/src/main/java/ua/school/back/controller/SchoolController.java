@@ -9,7 +9,6 @@ import ua.school.back.dto.SchoolDto;
 import ua.school.back.model.SchoolType;
 import ua.school.back.service.SchoolService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -22,8 +21,8 @@ public class SchoolController {
 
     @GetMapping(value = "/")
     public ResponseEntity<List<SchoolDto>> getSchools(@PathParam("region") String region,
-                                                   @PathParam("schoolType") SchoolType schoolType,
-                                                   @PathParam("active") Boolean active) {
+                                                      @PathParam("schoolType") SchoolType schoolType,
+                                                      @PathParam("active") Boolean active) {
         return ResponseEntity.ok(schoolService.getSchools(region, schoolType, active));
     }
 

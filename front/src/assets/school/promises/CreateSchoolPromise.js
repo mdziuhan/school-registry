@@ -8,5 +8,5 @@ export const CreateSchoolPromise = (name, region, edrpou, schoolType) => {
         edrpou,
         schoolType
     }
-    return  axios.post(REST_API_BASE_URL, data);
+    return axios.post(REST_API_BASE_URL, data);
 }

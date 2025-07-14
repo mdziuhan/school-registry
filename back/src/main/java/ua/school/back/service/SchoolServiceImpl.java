@@ -36,9 +36,6 @@ public class SchoolServiceImpl implements SchoolService {
                 .stream()
                 .map(SchoolMapper::mapToSchoolDto)
                 .collect(Collectors.toList());
-      /*  return schoolRepository.findAll().stream()
-                .map(SchoolMapper::mapToSchoolDto)
-                .collect(Collectors.toList());*/
     }
 
     public SchoolDto create(CreateSchoolRequestDto requestDto) {

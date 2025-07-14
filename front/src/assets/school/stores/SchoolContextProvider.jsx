@@ -1,6 +1,6 @@
 import {SchoolContext} from "./SchoolContext.jsx";
 import {useState} from "react";
-import {getSchoolsPromise} from "../promises/getSchoolsPromise.js";
+import {GetSchoolsByFilterPromise} from "../promises/GetSchoolsByFilterPromise.js";
 import {DeactivateSchoolPromise} from "../promises/DeactivateSchoolPromise.js";
 import {CreateSchoolPromise} from "../promises/CreateSchoolPromise.js";
 
@@ -20,7 +20,7 @@ export default function SchoolContextProvider({children}) {
     const [schools, setSchools] = useState([])
 
     const getSchools = () => {
-        getSchoolsPromise().then(response => {
+        GetSchoolsByFilterPromise().then(response => {
             setSchools(response.data)
         })
     }
@@ -92,7 +92,7 @@ export default function SchoolContextProvider({children}) {
     }
 
     const handleClickFilter = () => {
-        getSchoolsPromise(filterActive, filterRegion, filterSchoolType)
+        GetSchoolsByFilterPromise(filterActive, filterRegion, filterSchoolType)
             .then(response => {
             setSchools(response.data)
         })
