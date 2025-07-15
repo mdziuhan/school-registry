@@ -1,0 +1,40 @@
+version: '3.5'
+services:
+  database:
+    image: postgres:17.3
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  back-service:
+    image: school/back-service:latest
+    build:
+      context: ./back
+    container_name: back-service
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      PROFILE: "dev"
+    ports:
+      - "8080:8080"
+
+  front-service:
+    image: school/front-service:latest
+    build:
+      context: ./front
+    container_name: front-service
+    depends_on:
+      - back-service
+    environment:
+      PROFILE: "dev"
+    ports:
+      - "5173:5173"
