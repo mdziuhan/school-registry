@@ -6,7 +6,6 @@ import {CreateSchoolPromise} from "../promises/CreateSchoolPromise.js";
 
 export default function SchoolContextProvider({children}) {
 
-    const [edrpouNewSchool, setEdrpouNewSchool] = useState(null)
     const [filterActive, setFilterActive] = useState(null)
     const [filterRegion, setFilterRegion] = useState(null)
     const [filterSchoolType, setFilterSchoolType] = useState(null)
@@ -14,18 +13,16 @@ export default function SchoolContextProvider({children}) {
     const [isOpenDeactivationDialog, setOpenDeactivationDialog] = useState(false)
     const [idDeactivationDialog, setIdDeactivationDialog] = useState(false)
     const [nameDeactivationDialog, setNameDeactivationDialog] = useState(false)
-    const [nameNewSchool, setNameNewSchool] = useState(null)
-    const [regionNewSchool, setRegionNewSchool] = useState(null)
-    const [schoolTypeNewSchool, setSchoolTypeNewSchool] = useState(null)
+    const [newSchoolEdrpou, setNewSchoolEdrpou] = useState(null)
+    const [newSchoolName, setNewSchoolName] = useState(null)
+    const [newSchoolRegion, setNewSchoolRegion] = useState(null)
+    const [newSchoolSchoolType, setNewSchoolSchoolType] = useState(null)
     const [schools, setSchools] = useState([])
 
     const getSchools = () => {
         GetSchoolsByFilterPromise().then(response => {
             setSchools(response.data)
         })
-    }
-    const handleChangeEdrpouNewSchool = (edrpou) => {
-        setEdrpouNewSchool(edrpou)
     }
 
     const handleChangeFilterActive = (active) => {
@@ -40,16 +37,20 @@ export default function SchoolContextProvider({children}) {
         setFilterRegion(region)
     }
 
-    const handleChangeNameNewSchool = (name) => {
-        setNameNewSchool(name)
+    const handleChangeNewSchoolEdrpou = (edrpou) => {
+        setNewSchoolEdrpou(edrpou)
     }
 
-    const handleChangeRegionNewSchool = (region) => {
-        setRegionNewSchool(region)
+    const handleChangeNewSchoolName = (name) => {
+        setNewSchoolName(name)
     }
 
-    const handleChangeSchoolTypeNewSchool = (schoolType) => {
-        setSchoolTypeNewSchool(schoolType)
+    const handleChangeNewSchoolRegion = (region) => {
+        setNewSchoolRegion(region)
+    }
+
+    const handleChangeNewSchoolSchoolType = (schoolType) => {
+        setNewSchoolSchoolType(schoolType)
     }
 
     const handleClickCreationDialogClose = () => {
@@ -57,13 +58,13 @@ export default function SchoolContextProvider({children}) {
     }
 
     const handleClickCreationDialogConfirm = () => {
-        CreateSchoolPromise(nameNewSchool, regionNewSchool, edrpouNewSchool, schoolTypeNewSchool)
+        CreateSchoolPromise(newSchoolName, newSchoolRegion, newSchoolEdrpou, newSchoolSchoolType)
             .then(() => {
                 getSchools()
-                setNameNewSchool(null)
-                setRegionNewSchool(null)
-                setEdrpouNewSchool(null)
-                setSchoolTypeNewSchool(null)
+                setNewSchoolName(null)
+                setNewSchoolRegion(null)
+                setNewSchoolEdrpou(null)
+                setNewSchoolSchoolType(null)
                 setOpenCreationDialog(false)
             })
     }
@@ -99,18 +100,17 @@ export default function SchoolContextProvider({children}) {
     }
 
     const contextValue = {
-        edrpouNewSchool,
         filterActive,
         filterRegion,
         filterSchoolType,
         getSchools,
-        handleChangeEdrpouNewSchool,
         handleChangeFilterActive,
         handleChangeFilterSchoolType,
         handleChangeFilterRegion,
-        handleChangeNameNewSchool,
-        handleChangeRegionNewSchool,
-        handleChangeSchoolTypeNewSchool,
+        handleChangeNewSchoolEdrpou,
+        handleChangeNewSchoolName,
+        handleChangeNewSchoolRegion,
+        handleChangeNewSchoolSchoolType,
         handleClickCreationDialogClose,
         handleClickCreationDialogConfirm,
         handleClickCreationDialogOpen,
@@ -121,9 +121,10 @@ export default function SchoolContextProvider({children}) {
         isOpenCreationDialog,
         isOpenDeactivationDialog,
         nameDeactivationDialog,
-        nameNewSchool,
-        regionNewSchool,
-        schoolTypeNewSchool,
+        newSchoolEdrpou,
+        newSchoolName,
+        newSchoolRegion,
+        newSchoolSchoolType,
         schools,
     }
     return (

@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import {SchoolContext} from "../stores/SchoolContext.jsx";
 import {
     Button,
+    Container,
     Dialog,
     DialogActions,
     DialogContent,
@@ -23,34 +24,41 @@ import {
     TextField,
 } from "@mui/material";
 
-export const SchoolList = (props) => {
+export const SchoolList = () => {
 
     const {
-        edrpouNewSchool,
         filterActive,
         filterRegion,
         filterSchoolType,
+
         getSchools,
-        handleChangeEdrpouNewSchool,
         handleChangeFilterActive,
         handleChangeFilterSchoolType,
         handleChangeFilterRegion,
-        handleChangeNameNewSchool,
-        handleChangeRegionNewSchool,
-        handleChangeSchoolTypeNewSchool,
+
+        handleChangeNewSchoolEdrpou,
+        handleChangeNewSchoolName,
+        handleChangeNewSchoolRegion,
+        handleChangeNewSchoolSchoolType,
+
         handleClickCreationDialogClose,
         handleClickCreationDialogConfirm,
         handleClickCreationDialogOpen,
+
         handleClickDeactivationDialogClose,
         handleClickDeactivationDialogConfirm,
         handleClickDeactivationDialogOpen,
+
         handleClickFilter,
         isOpenCreationDialog,
         isOpenDeactivationDialog,
         nameDeactivationDialog,
-        nameNewSchool,
-        regionNewSchool,
-        schoolTypeNewSchool,
+
+        newSchoolEdrpou,
+        newSchoolName,
+        newSchoolRegion,
+        newSchoolSchoolType,
+
         schools,
     } = useContext(SchoolContext);
 
@@ -58,11 +66,8 @@ export const SchoolList = (props) => {
         getSchools();
     }, []);
     return (
-        <>
-            <Grid container>
-                <Grid>
-
-                </Grid>
+        <Container maxWidth={'lg'}>
+            <Grid container spacing={2}>
                 <Grid>
                     <TextField
                         fullWidth
@@ -70,7 +75,6 @@ export const SchoolList = (props) => {
                         onChange={({target}) => handleChangeFilterRegion(target.value)}
                         value={filterRegion}/>
                 </Grid>
-
                 <Grid>
                     <Select
                         value={filterSchoolType}
@@ -155,26 +159,26 @@ export const SchoolList = (props) => {
                     <TextField
                         fullWidth
                         label={'Name'}
-                        onChange={({target}) => handleChangeNameNewSchool(target.value)}
-                        value={nameNewSchool}
+                        onChange={({target}) => handleChangeNewSchoolName(target.value)}
+                        value={newSchoolName}
                     />
                     <TextField
                         fullWidth
                         label={'EDRPOU'}
-                        onChange={({target}) => handleChangeEdrpouNewSchool(target.value)}
-                        value={edrpouNewSchool}
+                        onChange={({target}) => handleChangeNewSchoolEdrpou(target.value)}
+                        value={newSchoolEdrpou}
                     />
                     <TextField
                         fullWidth
                         label={'Region'}
-                        onChange={({target}) => handleChangeRegionNewSchool(target.value)}
-                        value={regionNewSchool}
+                        onChange={({target}) => handleChangeNewSchoolRegion(target.value)}
+                        value={newSchoolRegion}
                     />
                     <Select
                         fullWidth
-                        value={schoolTypeNewSchool}
+                        value={newSchoolSchoolType}
                         label='SchoolType'
-                        onChange={({target}) => handleChangeSchoolTypeNewSchool(target.value)}
+                        onChange={({target}) => handleChangeNewSchoolSchoolType(target.value)}
                         variant='outlined'>
                         <MenuItem value={null}></MenuItem>
                         <MenuItem value={'GYMNASIUM'}>GYMNASIUM</MenuItem>
@@ -190,6 +194,6 @@ export const SchoolList = (props) => {
                 </DialogActions>
             </Dialog>
 
-        </>
+        </Container>
     )
 }
