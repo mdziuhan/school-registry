@@ -24,6 +24,7 @@ services:
         condition: service_healthy
     environment:
       PROFILE: "dev"
+      DATABASE_URL: jdbc:postgresql://database:5432/postgres
     ports:
       - "8080:8080"
 
